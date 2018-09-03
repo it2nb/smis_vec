@@ -1,0 +1,69 @@
+#adminmenu ul.navigation {
+	list-style-type: none;
+	padding-left: 0px;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+#adminmenu .menulist {
+	height: 25px;
+	width: 95%;
+	border-bottom-width: thin;
+	border-bottom-style: dotted;
+	font-weight: bold;
+	overflow: hidden;
+	padding-left: 10px;
+	padding-top: 10px;
+	background-color: #EEB;
+}
+
+#adminmenu .navigation li a {
+	background-image: url(../images/bullet1.gif);
+	width: 100%;
+	padding-left: 20px;
+	float: left;
+	background-repeat: no-repeat;
+	background-position: left center;
+	display: block;
+	height: 20px;
+	vertical-align: middle;
+}
+#adminmenu .navigation li:hover a{
+	color:#FFFFFF;
+}
+#adminmenu .navigation li:hover {
+	background-color:#FC6;
+}
+#navmain #mainlink, #navuserdata #userdatalink, #navuserpass #userpasslink, #navteach #teachlink,#navconsult #consultlink,#navselfdevelop #selfdeveloplink,#navresearch #researchlink,#navactivity #activitylink,#navservice #servicelink,#navstudentresult #studentresultlink,#navteacherresult #teacherresultlink,#navsarresult #sarresultlink,#navpresult #presultlink,#navpreport #preportlink,#navuser #userlink, #navperiod #periodlink, #navmajor #majorlink, #navdepart #departlink, #navboard #boardlink, #navstd #stdlink, #navsubject #subjectlink, #navmteach #mteachlink, #navmaffective #maffectivelink, #navact #actlink, #navannoun #announlink, #navinform #informlink, #navsmsa #smsalink, #navsmsb #smsblink{
+	width: 92%;
+	background-color: #FC3;
+	background-image: -webkit-gradient(linear,0% 0%,0% 50%,from(#FC3),to(#FC6));
+	background-image: -moz-linear-gradient(top,##FC6 20%,#FC3 100%);
+	border-top-width: medium;
+	border-top-style: solid;
+	border-top-color: #F90;
+}
+#navparty #partylink{
+	width: 92%;
+	background-color: #FC3;
+	background-image: -webkit-gradient(linear,0% 0%,0% 50%,from(#FC3),to(#FC6));
+	background-image: -moz-linear-gradient(top,##FC6 20%,#FC3 100%);
+	border-top-width: medium;
+	border-top-style: solid;
+	border-top-color: #F90;
+}
+.headmenu {
+	display: block;
+	height: 30px;
+	background-color: #069;
+	font-size: 12pt;
+	font-weight: bold;
+	color: #FFF;
+	border-top-width: thin;
+	border-top-style: solid;
+	border-top-color: #333;
+	border-bottom-width: medium;
+	border-bottom-style: solid;
+	border-bottom-color: #333;
+	padding-top: 10pt;
+	width: 100%;
+}

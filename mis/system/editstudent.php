@@ -1,0 +1,284 @@
+<?php
+session_start();
+include("../includefiles/connectdb.php");
+header("Content-type: text/html; charset=utf-8");
+if(empty($_SESSION["userID"]))
+{
+	echo "<meta http-equiv='refresh' content='0;url=../'>";
+}
+if($_POST["save_bt"]=="บันทึก")
+{
+	require_once("../includefiles/formvalidator.php");
+	$validator = new FormValidator();
+	$validator->addValidation("studentID_txt","req","กรุณากรอกรหัสนักเรียนนักศึกษา");
+	$validator->addValidation("studentname_txt","req","กรุณากรอกชื่อ");
+	$validator->addValidation("studentser_txt","req","กรุณากรอกนามสกุล");
+	$validator->addValidation("studentlevel_comb","req","กรุณาเลือกระดับชั้น");
+	$validator->addValidation("studentarea_comb","req","กรุณาเลือกสาขาวิชา");
+	$validator->addValidation("studentmajor_comb","req","กรุณาเลือกสาขางาน");
+	$validator->addValidation("studentemail_txt","email","กรุณากรอกอีเมลล์ให้ถูกต้อง");
+	if($validator->ValidateForm())
+	{
+		$student_ID = $_POST["studentID_txt"];
+		$oldstudent_ID = $_POST["oldstudentID_txt"];
+			
+		$query="Select student_ID From student Where student_ID='$student_ID'";
+		$checkstudent_query = mysql_query($query,$conn)or die(mysql_error());
+		if(mysql_num_rows($checkstudent_query) && $student_ID!=$oldstudent_ID)
+		{
+			$error_txt["studentID_txt"] = "รหัสนักศึกษานี้มีอยู่แล้ว";
+			$student_ID = $oldstudent_ID;
+		}
+		else
+		{
+			$student_ID = $_POST["studentID_txt"];
+			$student_gender = $_POST["studentgender_comb"];
+			$student_prefix = $_POST["studentprefix_comb"];
+			$student_name = $_POST["studentname_txt"];
+			$student_ser = $_POST["studentser_txt"];
+			$student_level = $_POST["studentlevel_comb"];
+			$student_area = $_POST["studentarea_comb"];
+			$student_major = $_POST["studentmajor_comb"];
+			$student_add = $_POST["studentadd_txt"];
+			$student_phone = $_POST["studentphone_txt"];
+			$student_email = $_POST["studentemail_txt"];
+	
+			$query="Update student Set student_ID='$student_ID',student_prefix='$student_prefix', student_gender='$student_gender', student_name='$student_name', student_ser='$student_ser', student_level='$student_level', area_ID='$student_area', major_ID='$student_major', student_add='$student_add', student_phone='$student_phone', student_email='$student_email' Where student_ID='$oldstudent_ID'";
+			$student_update=mysql_query($query,$conn) or die(mysql_error());
+			if($student_ID!=$oldstudent_ID){
+				$query="Update flagcheck Set student_ID='$student_ID' Where student_ID='$oldstudent_ID'";
+				$flagcheck_update=mysql_query($query,$conn)or die(mysql_error());
+			}
+			
+			echo "<script type='text/javascript'>
+
+				$('#admincontent').hide();
+
+				alert('บันทึกข้อมูลเรียบร้อย');
+
+				$('#systemcontent').load('managestudent.php');
+
+				</script>";
+		}
+	}
+	else
+	{
+		$error_txt = $validator->GetErrors(); 
+		$student_ID = $_POST["oldstudentID_txt"];
+	}
+}
+else if($_POST["cancel_bt"]=="ยกเลิก")
+{
+	echo "<script type='text/javascript'>
+		$('#admincontent').hide();
+		$('#systemcontent').load('managestudent.php');
+		</script>";
+}
+else
+	$student_ID = $_GET["student_ID"];
+$query = "Select * From student Where student_ID='$student_ID'";
+$student_query = mysql_query($query,$conn)or die(mysql_error());
+$student_fetch = mysql_fetch_array($student_query);
+?>
+<script type="text/javascript" src="../includefiles/jquery.js"></script>
+
+<script type="text/javascript" src="../includefiles/jquery.form.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() { 
+
+    $('#managestudent').click(function(){
+
+		$('#systemcontent').load('managestudent.php');		
+
+    });
+	$('#studentlevel_comb').change(function() {
+		if($('#studentlevel_comb').select().val()=="ปวช")
+        	$.get('comboval.php',{
+				table:'area',
+				where:'area_level',
+				whereval:'ปวช',
+				value:'area_ID',
+				comb_txt:'area_name'},function(data){
+				$('#studentarea_comb').html(data);
+				$('#studentarea_comb').change();
+			});
+		else if($('#studentlevel_comb').select().val()=="ปวส")
+        	$.get('comboval.php',{
+				table:'area',
+				where:'area_level',
+				whereval:'ปวส',
+				value:'area_ID',
+				comb_txt:'area_name'},function(data){
+				$('#studentarea_comb').html(data);
+				$('#studentarea_comb').change();
+			});
+		else
+			$('#studentarea_comb').html("");
+    });
+	$('#studentarea_comb').change(function() {
+		var area_ID = $('#studentarea_comb').select().val();
+        	$.get('comboval.php',{
+				table:'major',
+				where:'area_ID',
+				whereval:area_ID,
+				value:'major_ID',
+				comb_txt:'major_name'},function(data){
+				$('#studentmajor_comb').html(data);
+			});
+    });
+	$('#editstudentform').ajaxForm({ 
+
+        target: '#systemcontent',
+
+		beforeSubmit: function(){
+
+			$('#admincontent').html("<center>กำลังประมวลผลข้อมูล<br><img src='../images/progressbar.gif' /></center>");
+
+		},
+
+		success: function(){
+
+		}
+
+    });
+
+});
+
+</script>
+    	<div id="statusbar">เพิ่มข้อมูลนักเรียนนักศึกษา</div>
+		<div id="namebar"><?php echo "ยินดีต้อนรับ คุณ ".$_SESSION["user_name"]; ?>&nbsp;(<a href="../logout.php">ออกจากระบบ</a>)</div>
+        <div id="headmenu">&nbsp;<a id="managestudent" href="#"><img src="../images/icons/64/back.png" width="64" height="64"></a></div>
+        <div id="admincontent">
+        <center>
+        <form id="editstudentform" action="editstudent.php" method="post"><table width="80%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th height="30" colspan="2" align="center" valign="middle" bgcolor="#FFCC33">กรอกข้อมูลนักเรียนนักศึกษา</th>
+    </tr>
+  <tr>
+    <td width="40%" height="16" align="right" valign="middle" bgcolor="#CCCCCC">&nbsp;</td>
+    <td valign="middle" bgcolor="#CCCCCC">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">รหัสนักศึกษา : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label>
+    <input name="studentID_txt" type="text" id="studentID_txt" value="<?php echo $student_fetch["student_ID"];?>" size="15" maxlength="10" />
+    </label>
+    <span class="RedRegula10"><?php echo $error_txt["studentID_txt"];?> 
+    <input type="hidden" name="oldstudentID_txt" id="oldstudentID_txt" value="<?php echo $student_fetch["student_ID"];?>"/>
+    </span></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">เพศ : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><span class="RedRegula10">
+      <label for="g_txt"></label>
+      <label for="studentgender_comb"></label>
+      <select name="studentgender_comb" id="studentgender_comb">
+      <option value="ชาย" <?php if($student_fetch["student_gender"]=="ชาย") echo "selected='selected'";?>>ชาย</option>
+      <option value="หญิง" <?php if($student_fetch["student_gender"]=="หญิง") echo "selected='selected'";?>>หญิง</option>
+      </select>
+      <?php echo $error_txt["studentgender_comb"];?></span></td>
+  </tr>
+    <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">คำนำหน้าชื่อ : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><span class="RedRegula10">
+      <select name="studentprefix_comb" id="studentprefix_comb">
+      <option value="นาย" <?php if($student_fetch["student_prefix"]=="นาย") echo "selected='selected'";?>>นาย</option>
+      <option value="นางสาว" <?php if($student_fetch["student_prefix"]=="นางสาว") echo "selected='selected'";?>>นางสาว</option>
+      <option value="นาง" <?php if($student_fetch["student_prefix"]=="นาง") echo "selected='selected'";?>>นาง</option>
+      </select>
+      <?php echo $error_txt["studentprefix_comb"];?></span></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">ชื่อ : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label for="studentname_txt"></label>
+      <input name="studentname_txt" type="text" id="studentname_txt" value="<?php echo $student_fetch["student_name"];?>" size="30" maxlength="25" />
+      <label> </label>
+      <span class="RedRegula10"><?php echo $error_txt["studentname_txt"];?></span></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">สกุล : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label for="studentser_txt"></label>
+      <input name="studentser_txt" type="text" id="studentser_txt" value="<?php echo $student_fetch["student_ser"];?>" size="30" maxlength="25" />
+      <label> </label>
+      <span class="RedRegula10"><?php echo $error_txt["studentser_txt"];?></span></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">ระดับชั้น : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label for="studentlevel_comb"></label>
+      <select name="studentlevel_comb" id="studentlevel_comb" >
+       <option value="">เลือกระดับชั้น</option>
+      <option value="ปวช" <?php if($student_fetch["student_level"]=="ปวช") echo "selected='selected'";?>>ปวช</option>
+      <option value="ปวส" <?php if($student_fetch["student_level"]=="ปวส") echo "selected='selected'";?>>ปวส</option>
+      </select>
+      <span class="RedRegula10"> <?php echo $error_txt["studentlevel_comb"];?></span></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">สาขาวิชา : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label for="studentarea_comb"></label>
+      <select name="studentarea_comb" id="studentarea_comb" >
+      	 <?php
+	  	$area_level=$student_fetch["student_level"];
+	   	$query="Select * From area Where area_level='$area_level'";
+		$area_query=mysql_query($query,$conn)or die(mysql_error());
+		while($area_fetch=mysql_fetch_array($area_query)){
+	  ?>
+      <option value="<?php echo $area_fetch["area_ID"];?>" <?php if($student_fetch["area_ID"]==$area_fetch["area_ID"]) echo "selected='selected'";?>><?php echo $area_fetch["area_name"];?></option>
+      <?php } ?>
+      </select>
+      <span class="RedRegula10"> <?php echo $error_txt["studentarea_comb"];?></span></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">สาขางาน : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label for="studentmajor_comb"></label>
+      <select name="studentmajor_comb" id="studentmajor_comb">
+      <?php
+	  	$area_ID=$student_fetch["area_ID"];
+	   	$query="Select * From major Where area_ID='$area_ID'";
+		$major_query=mysql_query($query,$conn)or die(mysql_error());
+		while($major_fetch=mysql_fetch_array($major_query)){
+	  ?>
+      <option value="<?php echo $major_fetch["major_ID"];?>" <?php if($student_fetch["major_ID"]==$major_fetch["major_ID"]) echo "selected='selected'";?>><?php echo $major_fetch["major_name"];?></option>
+      <?php } ?>
+      </select>
+      <span class="RedRegula10"> <?php echo $error_txt["studentmajor_comb"];?></span></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="top" bgcolor="#CCCCCC">ที่อยู่ : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label for="studentadd_txt"></label>
+      <textarea name="studentadd_txt" id="studentadd_txt" cols="45" rows="5"><?php echo nl2br($student_fetch["student_add"]);?></textarea></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">เบอร์โทรติดต่อ : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label for="studentphone_txt"></label>
+      <input name="studentphone_txt" type="text" id="studentphone_txt" value="<?php echo $student_fetch["student_phone"];?>" size="30" />
+      <label> </label></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" valign="middle" bgcolor="#CCCCCC">อีเมลล์ : &nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC"><label for="studentemail_txt"></label>
+      <input name="studentemail_txt" type="text" id="studentemail_txt" value="<?php echo $student_fetch["student_email"];?>" size="30" />
+      <label> </label>
+      <span class="RedRegula10"><?php echo $error_txt["studentemail_txt"];?></span></td>
+  </tr>
+  <tr>
+    <td height="16" align="right" valign="middle" bgcolor="#CCCCCC">&nbsp;</td>
+    <td align="left" valign="middle" bgcolor="#CCCCCC">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="16" align="right" valign="middle" bgcolor="#FFCC33">&nbsp;</td>
+    <td valign="middle" bgcolor="#FFCC33">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="50" colspan="2" align="center" bgcolor="#CCCCCC"><label>
+      <input type="submit" name="save_bt" id="save_bt" value="บันทึก" />
+    </label>
+      <label>
+      <input type="submit" name="cancel_bt" id="cancel_bt" value="ยกเลิก" />
+      </label></td>
+    </tr>
+</table>
+        </form>
+        </center>
+</div>

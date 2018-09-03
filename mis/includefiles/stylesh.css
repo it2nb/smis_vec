@@ -1,0 +1,346 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	text-align: center;
+	font-family: "Microsoft Sans Serif";
+	font-size: 10pt;
+	background-attachment: fixed;
+	background-image: url(../images/bg.jpg);
+	background-repeat: repeat-x;
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+input{
+	border-color:#DDD;
+	border-width:thin;
+	border-style:solid;
+}
+input.largerCheckbox
+{
+width: 30pt;
+height: 30pt;
+}
+select{
+	border-color:#DDD;
+	border-width:thin;
+	border-style:solid;
+}
+textarea{
+	border-color:#DDD;
+	border-width:thin;
+	border-style:solid;
+}
+img{
+	border-style:none;
+}
+h3{
+	display: block;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #F93;
+	padding: 3px;
+}
+.ssris #contener {
+	text-align: center;
+	width: 100%;
+	background-color: #FFF;
+	float: left;
+}
+.ssris #contener #headerssr {
+	clear: both;
+	float: left;
+	width: 100%;
+	height: 100px;
+	background-color: #006699;
+	text-align: right;
+	font-family: "Microsoft Sans Serif";
+	font-size: 12pt;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.ssris #contener #content {
+	width: 75%;
+	text-align: left;
+	background-color: #FFFFFF;
+	float: left;
+	height: 450px;
+	position: relative;
+}
+.ssris #contener #leftside {
+	width: 23%;
+	float: left;
+	text-align: left;
+	clear: none;
+	border-left-width: medium;
+	border-left-style: dotted;
+	border-left-color: #003366;
+	background-color: #FFFFFF;
+	height: 434px;
+	padding: 8px;
+	position: relative;
+}
+.ssris #contener #footerssr {
+	width: 100%;
+	clear: both;
+	float: left;
+	text-align: center;
+	background-color: #FFCC66;
+	border-top-width: medium;
+	border-top-style: solid;
+	border-top-color: #003366;
+	border-left-width: medium;
+	border-bottom-width: medium;
+	border-bottom-style: solid;
+	border-bottom-color: #003366;
+}
+.ssris #contener #footerssr p {
+	padding: 0px;
+}
+.ssris #contener #leftside #loginform {
+	text-align: center;
+}
+@media screen and (min-width: 10px){
+.ssris #contener #systemcontent {
+	width: 72%;
+	text-align: left;
+	background-color: #FFFFFF;
+	float: left;
+	padding: 6px;
+	position: relative;
+}
+.ssris #contener #systemleftside {
+	width: 24%;
+	float: left;
+	text-align: left;
+	clear: none;
+	border-left-width: medium;
+	border-left-style: dotted;
+	border-left-color: #006633;
+	background-color: #FFFFFF;
+	padding: 5px;
+	position: relative;
+}
+}
+@media screen and (min-width: 1000px){
+.ssris #contener #systemcontent {
+	width: 73%;
+	text-align: left;
+	background-color: #FFFFFF;
+	float: left;
+	padding: 6px;
+	position: relative;
+}
+.ssris #contener #systemleftside {
+	width: 24%;
+	float: left;
+	text-align: left;
+	clear: none;
+	border-left-width: medium;
+	border-left-style: dotted;
+	border-left-color: #006633;
+	background-color: #FFFFFF;
+	padding: 5px;
+	position: relative;
+}
+}
+@media screen and (min-width: 1300px){
+.ssris #contener #systemcontent {
+	width: 73%;
+	text-align: left;
+	background-color: #FFFFFF;
+	float: left;
+	padding: 6px;
+	position: relative;
+}
+.ssris #contener #systemleftside {
+	width: 25%;
+	float: left;
+	text-align: left;
+	clear: none;
+	border-left-width: medium;
+	border-left-style: dotted;
+	border-left-color: #006633;
+	background-color: #FFFFFF;
+	padding: 5px;
+	position: relative;
+}
+}
+.ssris #contener #systemcontent #namebar {
+	text-align: right;
+	width: 50%;
+	float: left;
+	clear: none;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #009999;
+	border-top-style: solid;
+	border-top-width: thin;
+	border-top-color: #FFFFFF;
+}
+.ssris #contener #systemcontent #headmenu {
+	float: left;
+	width: 100%;
+	padding-top: 4px;
+}
+.ssris #contener #systemcontent #admincontent {
+	float: left;
+	width: 98%;
+	padding: 8px;
+}
+.ssris #contener #systemcontent   #admincontent #admincontenttop {
+	width: 100%;
+	float: left;
+	text-align: left;
+}
+.ssris #contener #systemcontent   #admincontent #admincontentleft {
+	width: 50%;
+	float: left;
+	text-align: left;
+}
+.ssris #contener #systemcontent #admincontent #admincontentright {
+	width: 49%;
+	float: right;
+	border-right-width: thin;
+	border-right-style: dashed;
+	border-right-color: #666;
+	border-left-width: thin;
+	border-left-style: dashed;
+	border-left-color: #666;
+	border-top-width: thin;
+	border-top-style: dashed;
+	border-top-color: #666;
+}
+.ssris #contener #systemcontent #teachercontent {
+	float: left;
+	width: 98%;
+	padding: 8px;
+}
+.ssris #contener #systemcontent  #teachercontent #teacherinfo {
+	width: 49%;
+	float: left;
+	text-align: left;
+	position: relative;
+}
+.ssris #contener #systemcontent #teachercontent #teacheredu {
+	width: 49%;
+	float: right;
+	border-right-width: thin;
+	border-right-style: none;
+	border-right-color: #666;
+	border-left-width: thin;
+	border-left-style: dashed;
+	border-left-color: #666;
+	border-top-width: thin;
+	border-top-style: none;
+	border-top-color: #666;
+	position: relative;
+}
+.ssris #contener #systemcontent  #teachercontent #teacherworkh {
+	width: 49%;
+	float: left;
+	text-align: left;
+	position: relative;
+}
+.ssris #contener #systemcontent #teachercontent #teacherduty {
+	width: 49%;
+	float: right;
+	border-right-width: thin;
+	border-right-style: none;
+	border-right-color: #666;
+	border-left-width: thin;
+	border-left-style: dashed;
+	border-left-color: #666;
+	border-top-width: thin;
+	border-top-style: none;
+	border-top-color: #666;
+	position: relative;
+}
+.ssris #contener #systemleftside a {
+	color: #000000;
+	font-weight: bold;
+}
+.ssris #contener #systemcontent #statusbar {
+	text-align: center;
+	float: left;
+	width: 49%;
+	background-color: #009999;
+	border: thin solid #009999;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.BlackBold10 {
+	font-family: "Microsoft Sans Serif";
+	font-size: 10pt;
+	font-weight: bold;
+	color: #000000;
+}
+.RedRegula10 {
+	font-family: "Microsoft Sans Serif";
+	font-size: 10pt;
+	color: #FF0000;
+}
+.BlackBold12 {
+	font-family: "Microsoft Sans Serif";
+	font-size: 12pt;
+	font-weight: bold;
+	color: #000000;
+}
+.BlueDark {
+	font-family: "Microsoft Sans Serif";
+	font-size: 10pt;
+	color: #069;
+}
+.ssris #maincontener {
+	text-align: center;
+	width: 100%;
+	float: left;
+}
+.ssris #blanket {
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	background-color:#111;
+	opacity: 0.65;
+	filter:alpha(opacity=65);
+	z-index: 9001;
+}
+.ssris #info {
+	position: absolute;
+	z-index: 9002;
+	top: 50px;
+}.headmenusty {
+	font-size: 16pt;
+	font-weight: bold;
+	color: #000;
+	height: 30pt;
+	width: 100%;
+	padding-top: 15px;
+	border-top-width: medium;
+	border-top-style: solid;
+	border-top-color: #333;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #333;
+	background-color: #999;
+}.blackRegula7 {
+	font-family: "Microsoft Sans Serif";
+	font-size: 7pt;
+	color: #000000;
+}
