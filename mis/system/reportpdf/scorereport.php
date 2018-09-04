@@ -192,7 +192,7 @@ td {
       <div align="left" class="content">
         <p align="center">
         <span class="head">
-        วิทยาลัยการอาชีพสอง
+        วิทยาลัย...
         <br>
         แผนภูมิแสดงความก้าวหน้าทางการเรียน (PROGRESS CHART)
         </span><br>

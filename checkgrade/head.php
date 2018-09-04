@@ -34,7 +34,7 @@ body {
     <td width="630" height="50" align="center" valign="bottom"><span class="style2">ระบบตรวจสอบผลการเรียนผ่านระบบอินเตอร์เน็ต</span></td>
   </tr>
   <tr>
-    <td height="50" align="center" valign="middle"><span class="style3">วิทยาลัยการอาชีพสอง<br>
+    <td height="50" align="center" valign="middle"><span class="style3">วิทยาลัย...<br>
     Song Industrial and Community Education College</span></td>
   </tr>
   <tr>

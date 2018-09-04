@@ -176,7 +176,7 @@ td {
       <div align="left" class="content">
         <p align="center">
         <span class="head">แบบรายงานผลการเรียน<br>
-วิทยาลัยการอาชีพสอง<br>
+วิทยาลัย...<br>
         ภาคเรียนที่ <?php echo $main_obj->teach_term;?> ปีการศึกษา  <?php echo $main_obj->teach_year+543;?><br>รหัสวิชา <?php echo $main_obj->subject_ID;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ชื่อวิชา <?php echo $main_obj->subject_name;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; จำนวน <?php echo $main_obj->subject_unit;?> หน่วยกิต<br>
         ระดับชั้น <?php if(substr($main_obj->class_ID,2,1)==2) echo 'ปวช.'; else echo 'ปวส.'; echo substr($main_obj->teach_year+543,2,2)-substr($main_obj->class_ID,0,2)+1;?> กลุ่มที่  <?php echo (int)substr($main_obj->class_ID,6,2);?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;การเรียนต่อสัปดาห์ ทฤษฎี <?php echo $main_obj->subject_hourt;?> คาบ ปฏิบัติ <?php echo $main_obj->subject_hourp;?> คาบ<br>
 สาขาวิชา <?php echo $main_obj->area_name;?> &nbsp;&nbsp;&nbsp;&nbsp;สาขางาน <?php echo $main_obj->major_name;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ครูผู้สอน <?php echo $main_obj->personnel_name.' '.$main_obj->personnel_ser;?>

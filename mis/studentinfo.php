@@ -74,7 +74,7 @@ $thisweek = $caldatetime->getweek($today,$period_fetch["period_start"],$period_f
 <div id="maindiv">
   <div id="formdiv">
     	<h1>ตรวจสอบข้อมูลการเรียนของนักเรียนนักศึกษา</h1>
-      <h2>วิทยาลัยการอาชีพสอง</h2>
+      <h2>วิทยาลัย...</h2>
         <hr color="#333333"/>
         <br />
     	<form action="studentinfo.php" method="post" >
